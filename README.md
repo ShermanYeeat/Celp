@@ -1,7 +1,7 @@
 # Celp
-There have been a lot of vaccine centers popping up, so I have created a Yelp style website for
-vaccine centers to inform users about local vaccine centers around them. Created with Mongodb, 
-Express, and Node.
+There have been a lot of covid vaccine centers popping up, so I have created a Yelp style website
+for covid vaccine centers to inform users about local vaccine centers around them. Created with 
+Mongodb, Express, and Node.
 
 ## Please have the following installed locally:
 * Node.js
