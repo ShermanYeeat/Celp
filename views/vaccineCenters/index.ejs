@@ -1,0 +1,36 @@
+<% layout('layouts/boilerplate')%>
+
+    <h1 class="mb-4">All Vaccine Centers</h1>
+    <% for (let vc of vcs){%>
+        <div class="card mb-4">
+            <div class="row">
+                <div class="col-md-4 d-flex align-items-center justify-content-center pl-5">
+                    <img class="img-fluid" alt="" src="<%=vc.image%>">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= vc.name %>
+                        </h5>
+                        <p class="card-text mb-0">
+                            Type: <%= vc.service %>
+                        </p>
+                        <p class="card-text">
+                            Price: $<%= vc.price %>
+                        </p>
+                        <p class="card-text">
+                            <%= vc.description %>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <%= vc.location%>
+                            </small>
+                        </p>
+                        <a class="btn btn-primary" href="/vaccineCenters/<%=vc._id%>">View
+                            <%=vc.name%>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }%>

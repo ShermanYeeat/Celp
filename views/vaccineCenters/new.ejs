@@ -1,0 +1,55 @@
+<% layout('layouts/boilerplate')%>
+    <div class="row mb-5">
+        <h1 class="text-center mb-4">New Vaccine Center</h1>
+        <div class="col-6 offset-3">
+            <form action="/vaccineCenters" method="POST" novalidate class="validated-form">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name</label>
+                    <input class="form-control" type="text" id="name" name="vaccineCenter[name]" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" id="location" name="vaccineCenter[location]" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">Image Url</label>
+                    <input class="form-control" type="text" id="image" name="vaccineCenter[image]" required>
+                </div>
+                <!--
+                <div class="mb-3">
+                    <label class="form-label" for="service">Service</label>
+                    <input class="form-control" type="text" id="service" name="vaccineCenter[service]" required>
+                </div>
+                -->
+                <div class="row">
+                    <div class="mb-3 col-4">
+                        <label class="form-label" for="price">Vaccine Center Pricing</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="price-label">$</span>
+                            <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                                aria-describedby="price-label" name="vaccineCenter[price]" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-8">
+                        <label class="form-label" for="service">Service(s)</label>
+                        <select class="form-select" id="service" name="vaccineCenter[service]"
+                            aria-label="multiple select">
+                            <option selected>Select Service(s) Offered</option>
+                            <option value="Walk-In">Walk-In</option>
+                            <option value="Appointment">Appointment</option>
+                            <option value="Both">Both</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" type="text" id="description" name="vaccineCenter[description]"
+                        required></textarea>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-success">Add Vaccine Center</button>
+                </div>
+            </form>
+        </div>
+    </div>
