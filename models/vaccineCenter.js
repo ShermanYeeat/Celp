@@ -1,8 +1,9 @@
-const mongoose = require('mongoose')
-const Review = require('./review')
-const Schema = mongoose.Schema
+const mongoose=require('mongoose')
+const Review=require('./review')
+const Schema=mongoose.Schema
+const opts={ toJSON: { virtuals: true } };
 
-const vaccineCenterSchema = new Schema({
+const vaccineCenterSchema=new Schema({
     name: String,
     description: String,
     image: String,
@@ -17,8 +18,25 @@ const vaccineCenterSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Review'
         }
-    ]
-})
+    ],
+    geometry: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    }
+}, opts)
+
+vaccineCenterSchema.virtual('properties.popUpMarkup').get(function () {
+    return `
+    <strong><a href="/vaccineCenters/${this._id}">${this.name}</a><strong>
+    <p>${this.description.substring(0, 20)}...</p>`
+});
 
 vaccineCenterSchema.post('findOneAndDelete', async function (document) {
     if (document) {
@@ -30,4 +48,4 @@ vaccineCenterSchema.post('findOneAndDelete', async function (document) {
     }
 })
 
-module.exports = mongoose.model('VaccineCenter', vaccineCenterSchema)
+module.exports=mongoose.model('VaccineCenter', vaccineCenterSchema)

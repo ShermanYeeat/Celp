@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -8,6 +12,7 @@ const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
 const vaccineCenter = require('./routes/vaccineCenter');
 const reviews = require('./routes/reviews');
+
 
 mongoose.connect('mongodb://localhost:27017/celp', {
     useNewUrlParser: true,

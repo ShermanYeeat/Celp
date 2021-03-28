@@ -6,6 +6,10 @@ const { vaccineCenterSchema } = require('../schemas.js')
 const ExpressError = require('../utils/ExpressError');
 const vaccineCenter = require('../models/vaccineCenter')
 
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken })
+
 const validateVaccineCenter = (req, res, next) => {
     console.log(req.body)
     const { error } = vaccineCenterSchema.validate(req.body);
@@ -29,8 +33,12 @@ router.get('/new', (req, res) => {
 
 router.post('/', validateVaccineCenter, catchAsync(async (req, res, next) => {
     // if (!req.body.vaccineCenter) throw new ExpressError('Invalid vaccineCenter Data', 400);
-    console.log(req.body.vaccineCenter)
+    const geoData = await geocoder.forwardGeocode({
+        query: req.body.vaccineCenter.location,
+        limit: 1
+    }).send()
     const vc = new vaccineCenter(req.body.vaccineCenter);
+    vc.geometry = geoData.body.features[0].geometry;
     await vc.save();
     req.flash('success', 'Successfully uploaded a new Vaccine Center!');
     res.redirect(`/vaccineCenters/${vc._id}`)
