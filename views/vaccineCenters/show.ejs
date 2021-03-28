@@ -33,6 +33,7 @@
         </div>
 
         <div class="col-5 mx-auto">
+            <div id='map' style='width: 100%; height: 300px;'></div>
             <div class="border py-2 px-4 mb-3">
                 <h2>Leave a Review</h2>
                 <form action="/vaccineCenters/<%=vc._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
@@ -92,8 +93,17 @@
                         <form action="/vaccineCenters/<%=vc._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
                             <button class="btn btn-sm btn-danger">Delete</button>
                         </form>
+
                     </div>
                 </div>
                 <% } %>
         </div>
     </div>
+
+
+    <script>
+        const mapToken='<%-process.env.MAPBOX_TOKEN%>';
+        const vc= <%- JSON.stringify(vc)%>;
+    </script>
+
+    <script src="/javascripts/showMap.js"></script>"
