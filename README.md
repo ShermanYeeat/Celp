@@ -1,5 +1,5 @@
 # Celp
-There have been a lot of covid vaccine centers popping up, so I have created a Yelp style website
+There have been a lot of covid vaccine centers popping up, so I have created a Yelp style review website
 for covid vaccine centers to inform users about local vaccine centers around them. Created with 
 Mongodb, Express, and Node.
 
