@@ -17,6 +17,7 @@ Mongodb, Express, and Node.
 * express-session
 * joi
 * method-override
+* mapbox
 
 ## Usage (3 Terminals Needed)
 1. Run 'npm install' in the root directory to install all dependencies
