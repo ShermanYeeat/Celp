@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const cities = require('./cities')
-const { places } = require('./seedHelpers')
-const vaccineCenter = require('../models/vaccineCenter')
+const mongoose=require('mongoose')
+const cities=require('./cities')
+const { places, images }=require('./seedHelpers')
+const vaccineCenter=require('../models/vaccineCenter')
 
 mongoose.connect('mongodb://localhost:27017/celp', {
     useNewUrlParser: true,
@@ -9,18 +9,18 @@ mongoose.connect('mongodb://localhost:27017/celp', {
     useUnifiedTopology: true
 })
 
-const db = mongoose.connection
+const db=mongoose.connection
 
 db.on("error", console.error.bind(console, "connection error:"))
 db.once("open", () => {
     console.log("Database connected")
 })
 
-const sample = array => array[Math.floor(Math.random() * array.length)]
+const sample=array => array[Math.floor(Math.random()*array.length)]
 
-const seedDB = async () => {
+const seedDB=async () => {
     await vaccineCenter.deleteMany({})
-    for (let i=0; i<200; i++) {
+    for (let i=0; i<150; i++) {
         const random=Math.random()
         const random1000=Math.floor(random*1000)
         const price=Math.floor(random*20)+10
@@ -30,10 +30,11 @@ const seedDB = async () => {
         } else if (random<0.66) {
             service='Both'
         }
+        image=images[Math.floor(random*images.length)]
         const vc=new vaccineCenter({
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             name: `${sample(places)}`,
-            image: 'https://source.unsplash.com/1600x900/?medical-building',
+            image,
             service,
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!',
             price,

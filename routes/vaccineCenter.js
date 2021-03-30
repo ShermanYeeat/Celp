@@ -1,79 +1,79 @@
-const express = require('express');
-const router = express.Router();
-const catchAsync = require('../utils/catchAsync');
+const express = require('express')
+const router = express.Router()
+const catchAsync = require('../utils/catchAsync')
 const { vaccineCenterSchema } = require('../schemas.js')
 
-const ExpressError = require('../utils/ExpressError');
+const ExpressError = require('../utils/ExpressError')
 const vaccineCenter = require('../models/vaccineCenter')
 
-const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
-const mapBoxToken = process.env.MAPBOX_TOKEN;
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding")
+const mapBoxToken = process.env.MAPBOX_TOKEN
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken })
 
 const validateVaccineCenter = (req, res, next) => {
     console.log(req.body)
-    const { error } = vaccineCenterSchema.validate(req.body);
+    const { error } = vaccineCenterSchema.validate(req.body)
     if (error) {
         const msg = error.details.map(ele => ele.message).join(',')
         throw new ExpressError(msg, 400)
     } else {
-        next();
+        next()
     }
 }
 
 router.get('/', catchAsync(async (req, res) => {
-    const vcs = await vaccineCenter.find({});
+    const vcs = await vaccineCenter.find({})
     res.render('vaccineCenters/index', { vcs })
-}));
+}))
 
 router.get('/new', (req, res) => {
-    res.render('vaccineCenters/new');
+    res.render('vaccineCenters/new')
 })
 
 
 router.post('/', validateVaccineCenter, catchAsync(async (req, res, next) => {
-    // if (!req.body.vaccineCenter) throw new ExpressError('Invalid vaccineCenter Data', 400);
+    // if (!req.body.vaccineCenter) throw new ExpressError('Invalid vaccineCenter Data', 400)
     const geoData = await geocoder.forwardGeocode({
         query: req.body.vaccineCenter.location,
         limit: 1
     }).send()
-    const vc = new vaccineCenter(req.body.vaccineCenter);
-    vc.geometry = geoData.body.features[0].geometry;
-    await vc.save();
-    req.flash('success', 'Successfully uploaded a new Vaccine Center!');
+    const vc = new vaccineCenter(req.body.vaccineCenter)
+    vc.geometry = geoData.body.features[0].geometry
+    await vc.save()
+    req.flash('success', 'Successfully uploaded a new Vaccine Center!')
     res.redirect(`/vaccineCenters/${vc._id}`)
 }))
 
 router.get('/:id', catchAsync(async (req, res,) => {
-    const vc = await vaccineCenter.findById(req.params.id).populate('reviews');
+    const vc = await vaccineCenter.findById(req.params.id).populate('reviews')
     if (!vc) {
-        req.flash('error', 'Cannot find that vaccineCenter!');
-        return res.redirect('/vaccineCenters');
+        req.flash('error', 'Cannot find that vaccineCenter!')
+        return res.redirect('/vaccineCenters')
     }
-    res.render('vaccineCenters/show', { vc });
-}));
+    res.render('vaccineCenters/show', { vc })
+}))
 
 router.get('/:id/edit', catchAsync(async (req, res) => {
     const vc = await vaccineCenter.findById(req.params.id)
     if (!vc) {
-        req.flash('error', 'Cannot find that Vaccine Center!');
-        return res.redirect('/vaccineCenters');
+        req.flash('error', 'Cannot find that Vaccine Center!')
+        return res.redirect('/vaccineCenters')
     }
-    res.render('vaccineCenters/edit', { vc });
+    res.render('vaccineCenters/edit', { vc })
 }))
 
 router.put('/:id', validateVaccineCenter, catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const vc = await vaccineCenter.findByIdAndUpdate(id, { ...req.body.vaccineCenter });
-    req.flash('success', 'Successfully updated Vaccine Center!');
+    const { id } = req.params
+    const vc = await vaccineCenter.findByIdAndUpdate(id, { ...req.body.vaccineCenter })
+    req.flash('success', 'Successfully updated Vaccine Center!')
     res.redirect(`/vaccineCenters/${vc._id}`)
-}));
+}))
 
 router.delete('/:id', catchAsync(async (req, res) => {
-    const { id } = req.params;
-    await vaccineCenter.findByIdAndDelete(id);
+    const { id } = req.params
+    await vaccineCenter.findByIdAndDelete(id)
     req.flash('success', 'Successfully deleted Vaccine Center.')
-    res.redirect('/vaccineCenters');
-}));
+    res.redirect('/vaccineCenters')
+}))
 
-module.exports = router;
+module.exports = router

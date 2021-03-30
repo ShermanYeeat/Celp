@@ -1,27 +1,29 @@
-<% layout('layouts/boilerplate')%>
+<% layout('layouts/boilerplate') %>
 
-    <div class="row mb-5">
+    <div class="row my-4">
         <div class="col-6 mx-auto">
             <div class="card mb-3 p-3">
-                <img src="<%= vc.image%>" class="card-img-top d-flex mx-auto" alt="...">
+                <img src="<%= vc.image %>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <%= vc.name%>
+                        <%= vc.name %>
                     </h5>
                     <p class="card-text">
-                        <%= vc.description%>
+                        <%= vc.description %>
                     </p>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item text-muted">
-                        <%= vc.location%>
+                        <%= vc.location %>
                     </li>
-                    <li class="list-group-item">$<%= vc.price%>
+                    <li class="list-group-item">Services: <%= vc.service %>
+                    </li>
+                    <li class="list-group-item">Pricing - $<%= vc.price %>
                     </li>
                 </ul>
                 <div class="card-body">
-                    <a class="card-link btn btn-info" href="/vaccineCenters/<%=vc._id%>/edit">Edit</a>
-                    <form class="d-inline" action="/vaccineCenters/<%=vc._id%>?_method=DELETE" method="POST">
+                    <a class="card-link btn btn-primary" href="/vaccineCenters/<%= vc._id %>/edit">Edit</a>
+                    <form class="d-inline" action="/vaccineCenters/<%= vc._id %>?_method=DELETE" method="POST">
                         <button class="btn btn-danger">Delete</button>
                     </form>
                 </div>
@@ -34,9 +36,10 @@
 
         <div class="col-5 mx-auto">
             <div id='map' style='width: 100%; height: 300px;'></div>
-            <div class="border py-2 px-4 mb-3">
-                <h2>Leave a Review</h2>
-                <form action="/vaccineCenters/<%=vc._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
+            <div class="border pt-2 px-4 my-5">
+                <h2 class="mb-4">Leave a Review</h2>
+                <form action="/vaccineCenters/<%= vc._id %>/reviews" method="POST" class="mb-3 validated-form"
+                    novalidate>
                     <!--
                     <div class="mb-3">
                         <label class="form-label" for="rating">Rating</label>
@@ -44,7 +47,7 @@
                     </div>
                     -->
                     <div class="row">
-                        <div class="mb-2 col-4">
+                        <div class="mb-2 col-5">
                             <label class="form-label" for="rating">Rating</label>
                             <select class="form-select" id="rating" name="review[rating] aria-label=" select">
                                 <option selected>Select Rating</option>
@@ -55,10 +58,10 @@
                                 <option value="5">5</option>
                             </select>
                         </div>
-                        <div class="mb-3 col-8">
+                        <div class="mb-3 col-7">
                             <label class="form-label" for="service">Service</label>
                             <select class="form-select" id="service" name="review[service] aria-label=" select">
-                                <option selected>Select Service Offered</option>
+                                <option selected>Select Service(s) Offered</option>
                                 <option value="Walk-In">Walk-In</option>
                                 <option value="Appointment">Appointment</option>
                                 <option value="Both">Both</option>
@@ -68,8 +71,8 @@
                     </div>
                     <div class="mb-4">
                         <label class="form-label" for="description">Review</label>
-                        <textarea class="form-control" name="review[description]" id="description" cols="30" rows="3"
-                            required></textarea>
+                        <textarea class="form-control" name="review[description]" id="description" cols="30" rows="4"
+                            required placeholder="Please give a review!"></textarea>
                     </div>
                     <!--
                     <div class="mb-3">
@@ -77,20 +80,22 @@
                         <input class="form-control" name="review[service]" required></input>
                     </div>
                     -->
-                    <button class="btn btn-success">Submit</button>
+                    <button class="btn btn-primary">Submit</button>
                 </form>
             </div>
             <% for(let review of vc.reviews) { %>
                 <div class="card mb-3 ">
                     <div class="card-body">
-                        <h5 class="card-title">Rating: <%= review.rating %>
+                        <h5 class="card-title mb-0">Rating: <%= review.rating %>
                         </h5>
                         <p class="card-text mb-1">Service: <%= review.service %>
                         </p>
-                        <p class="card-text mb-2">Review: <%= review.description %>
+                        <p class="card-text mb-2">
+                            <%= review.description %>
                         </p>
 
-                        <form action="/vaccineCenters/<%=vc._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+                        <form action="/vaccineCenters/<%= vc._id %>/reviews/<%= review._id %>?_method=DELETE"
+                            method="POST">
                             <button class="btn btn-sm btn-danger">Delete</button>
                         </form>
 
@@ -102,8 +107,8 @@
 
 
     <script>
-        const mapToken='<%-process.env.MAPBOX_TOKEN%>';
-        const vc= <%- JSON.stringify(vc)%>;
+        const mapToken='<%- process.env.MAPBOX_TOKEN %>'
+        const vc= <%- JSON.stringify(vc)%>
     </script>
 
-    <script src="/javascripts/showMap.js"></script>"
+    <script src="/javascripts/showMap.js"></script>
