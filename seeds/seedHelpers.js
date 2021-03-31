@@ -1,4 +1,4 @@
-module.exports.places=[
+module.exports.names = [
     'Kootenai Health',
     'Kosciusko Community Hospital',
     'Kuakini Medical Center',
@@ -1400,7 +1400,7 @@ module.exports.places=[
 
 
 
-module.exports.images=[
+module.exports.images = [
     'http://d279m997dpfwgl.cloudfront.net/wp/2020/04/wide-view-from-above-1000x750.jpg',
     'https://s18671.pcdn.co/wp-content/uploads/2020/05/IMG_1616.jpg',
     'https://www.umms.org/-/media/images/umms/coronavirus/fighting-covid/expanded-locations/overhead-bccfh.jpg?h=310&w=550&la=en&hash=CBB92EB11D714816C2A26FF134759BB9F09CBA4C',

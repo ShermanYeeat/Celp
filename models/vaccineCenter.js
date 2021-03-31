@@ -8,11 +8,15 @@ const vaccineCenterSchema = new Schema({
     description: String,
     image: String,
     price: Number,
+    location: String,
     service: {
         type: String,
         enum: ['Walk-In', 'Appointment', 'Both']
     },
-    location: String,
+    vaccine: {
+        type: String,
+        enum: ['Pfizer', 'Moderna', 'Johnson & Johnson']
+    },
     reviews: [
         {
             type: Schema.Types.ObjectId,
@@ -32,11 +36,14 @@ const vaccineCenterSchema = new Schema({
     }
 }, opts)
 
+// Gives Vaccine Centers an additional variable popUpMarkup 
+// What pops up when clicking on a vaccine center in the cluster map
 vaccineCenterSchema.virtual('properties.popUpMarkup').get(function () {
     return `<strong><a href="/vaccineCenters/${this._id}">${this.name}</a><strong>
     <p>${this.description.substring(0, 20)}...</p>`
 })
 
+// When a vaccine center is deleted, remove all reviews associated with them
 vaccineCenterSchema.post('findOneAndDelete', async function (document) {
     if (document) {
         await Review.deleteMany({

@@ -7,7 +7,8 @@ module.exports.vaccineCenterSchema = Joi.object({
         image: Joi.string().required(),
         location: Joi.string().required(),
         description: Joi.string().required(),
-        service: Joi.string().required()
+        service: Joi.string().required(),
+        vaccine: Joi.string().required()
     }).required()
 })
 

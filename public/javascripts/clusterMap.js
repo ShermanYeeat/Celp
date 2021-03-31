@@ -1,5 +1,5 @@
-mapboxgl.accessToken=mapToken
-const map=new mapboxgl.Map({
+mapboxgl.accessToken = mapToken
+const map = new mapboxgl.Map({
     container: 'cluster-map',
     style: 'mapbox://styles/mapbox/light-v10',
     center: [-98, 38],
@@ -80,10 +80,10 @@ map.on('load', function () {
 
     // inspect a cluster on click
     map.on('click', 'clusters', function (e) {
-        const features=map.queryRenderedFeatures(e.point, {
+        const features = map.queryRenderedFeatures(e.point, {
             layers: ['clusters']
         })
-        const clusterId=features[0].properties.cluster_id
+        const clusterId = features[0].properties.cluster_id
         map.getSource('vcs').getClusterExpansionZoom(
             clusterId,
             function (err, zoom) {
@@ -102,14 +102,14 @@ map.on('load', function () {
     // the location of the feature, with
     // description HTML from its properties.
     map.on('click', 'unclustered-point', function (e) {
-        const { popUpMarkup }=e.features[0].properties
-        const coordinates=e.features[0].geometry.coordinates.slice()
+        const { popUpMarkup } = e.features[0].properties
+        const coordinates = e.features[0].geometry.coordinates.slice()
 
         // Ensure that if the map is zoomed out such that
         // multiple copies of the feature are visible, the
         // popup appears over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng-coordinates[0])>180) {
-            coordinates[0]+=e.lngLat.lng>coordinates[0]? 360:-360
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
         }
 
         new mapboxgl.Popup()
@@ -119,9 +119,9 @@ map.on('load', function () {
     })
 
     map.on('mouseenter', 'clusters', function () {
-        map.getCanvas().style.cursor='pointer'
+        map.getCanvas().style.cursor = 'pointer'
     })
     map.on('mouseleave', 'clusters', function () {
-        map.getCanvas().style.cursor=''
+        map.getCanvas().style.cursor = ''
     })
 })

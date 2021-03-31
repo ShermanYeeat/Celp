@@ -6,13 +6,14 @@ const map = new mapboxgl.Map({
     zoom: 10 // starting zoom
 })
 
+map.addControl(new mapboxgl.NavigationControl())
 new mapboxgl.Marker()
     .setLngLat(vc.geometry.coordinates)
     .setPopup(
         new mapboxgl.Popup({ offset: 25 })
             .setHTML(
-                `<h6>${vc.name}</h6>
-                <p>${vc.location}</p>`
+                `<h7>${vc.name}</h7>
+                <p> <span class="text-muted"> ${vc.location} </span> </p>`
             )
     )
     .addTo(map)
