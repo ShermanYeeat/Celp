@@ -5,8 +5,9 @@
             <div class="card mb-3 p-3">
                 <img src="<%= vc.image %>" class="card-img-top"  style="width:100%; height:100%; max-height:22rem;" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title"> <%= vc.name %> </h5>
-                    <p class="card-text"> <%= vc.description %> </p>
+                    <h5 class="card-title mb-0"> <%= vc.name %> </h5>
+                    <a class="" href="<%= vc.registerURL %>"> <%= vc.registerURL %> </a>
+                    <p class="card-text mt-3"> <%= vc.description %> </p>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item text-muted"> <%= vc.location %> </li>

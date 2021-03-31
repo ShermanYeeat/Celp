@@ -37,6 +37,7 @@ const seedDB = async () => {
         const vc = new vaccineCenter({
             location: `${place.city}, ${place.state}`,
             name: `${sample(names)}`,
+            registerURL: 'https://www.formstack.com/templates/vaccine-registration-form',
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!',
             geometry: {
                 type: "Point",

@@ -5,24 +5,29 @@
         <div class="col-7 mx-auto">
             <form action="/vaccineCenters" method="POST" novalidate class="validated-form">
                 <div class="row">
-                    <div class="mb-3 col-6">
+                    <div class="mb-2 col-6">
                         <label class="form-label" for="name">Name</label>
                         <input class="form-control" type="text" id="name" name="vaccineCenter[name]" required
                             placeholder="Name">
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-2 col-6">
                         <label class="form-label" for="location">Location</label>
                         <input class="form-control" type="text" id="location" name="vaccineCenter[location]" required
                             placeholder="Enter location">
                     </div>
                 </div>
-                <div class="mb-3">
+                <div class="mb-2">
+                    <label class="form-label" for="registerURL">Register URL</label>
+                    <input class="form-control" type="text" id="registerURL" name="vaccineCenter[registerURL]" required
+                        placeholder="Register URL">
+                </div>
+                <div class="mb-2">
                     <label class="form-label" for="image">Image URL</label>
                     <input class="form-control" type="text" id="image" name="vaccineCenter[image]" required
                         placeholder="Image URL">
                 </div>
                 <div class="row">
-                    <div class="mb-3 col-4">
+                    <div class="mb-2 col-4">
                         <label class="form-label" for="vaccine">Vaccine</label>
                         <select class="form-select" id="service" name="vaccineCenter[vaccine]"
                             aria-label="multiple select" required>
@@ -33,7 +38,7 @@
 
                         </select>
                     </div>
-                    <div class="mb-3 col-3">
+                    <div class="mb-2 col-3">
                         <label class="form-label" for="price">Pricing</label>
                         <div class="input-group">
                             <span class="input-group-text" id="price-label">$</span>
@@ -41,7 +46,7 @@
                                 aria-describedby="price-label" name="vaccineCenter[price]" required>
                         </div>
                     </div>
-                    <div class="mb-3 col-5">
+                    <div class="mb-2 col-5">
                         <label class="form-label" for="service">Service(s)</label>
                         <select class="form-select" id="service" name="vaccineCenter[service]"
                             aria-label="multiple select">
@@ -53,14 +58,16 @@
                         </select>
                     </div>
                 </div>
-                <div class="mb-4">
+                <div class="mb-3">
                     <label class="form-label" for="description">Description</label>
                     <textarea class="form-control" type="text" id="description" name="vaccineCenter[description]"
                         required placeholder="Please give a description of the place." rows="5"></textarea>
                 </div>
-                <div class="mb-3">
+                <div class="mb-2">
                     <button class="btn btn-primary btn-lg btn-block">Add Vaccine Center</button>
                 </div>
             </form>
+            <a href="/vaccineCenters/" class="btn btn-secondary btn-lg btn-block" role="button">
+                Back To Vaccine Centers</a>
         </div>
     </div>
