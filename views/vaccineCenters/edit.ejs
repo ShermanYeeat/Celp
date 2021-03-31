@@ -1,7 +1,8 @@
 <% layout('layouts/boilerplate') %>
+
     <div class="row">
         <h1 class="text-center mb-4">Edit Vaccine Center</h1>
-        <div class="col-6 offset-3">
+        <div class="col-7 mx-auto">
             <form action="/vaccineCenters/<%= vc._id %>?_method=PUT" method="POST" novalidate class="validated-form">
                 <div class="row">
                     <div class="mb-3 col-6">
@@ -22,7 +23,17 @@
                 </div>
                 <div class="row">
                     <div class="mb-3 col-4">
-                        <label class="form-label" for="price">Vaccine Pricing</label>
+                        <label class="form-label" for="vaccine">Vaccine</label>
+                        <select class="form-select" id="service" name="vaccineCenter[vaccine]"
+                            aria-label="multiple select" value="<%= vc.vaccine %>" required>
+                            <option value="Pfizer">Pfizer</option>
+                            <option value="Moderna">Moderna</option>
+                            <option value="Johnson & Johnson">Johnson & Johnson</option>
+
+                        </select>
+                    </div>
+                    <div class="mb-3 col-3">
+                        <label class="form-label" for="price">Pricing</label>
                         <div class="input-group">
                             <span class="input-group-text" id="price-label">$</span>
                             <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
@@ -30,25 +41,26 @@
                                 required>
                         </div>
                     </div>
-
-                    <div class="mb-3 col-8">
+                    <div class="mb-3 col-5">
                         <label class="form-label" for="service">Service(s)</label>
-                        <input class="form-control" type="text" id="service" name="vaccineCenter[service]"
-                            value="<%= vc.service  %>" required>
+                        <select class="form-select" id="service" aria-label="multiple select"
+                            name="vaccineCenter[service]" value="<%= vc.service  %>" required>
+                            <option value="Walk-In">Walk-In</option>
+                            <option value="Appointment">Appointment</option>
+                            <option value="Both">Both</option>
+                        </select>
                     </div>
                 </div>
                 <div class="mb-4">
                     <label class="form-label" for="description">Description</label>
                     <textarea class="form-control" type="text" id="description" name="vaccineCenter[description]"
-                        required rows="5"><%=  vc.description %></textarea>
+                        required rows="4"><%=  vc.description %></textarea>
                 </div>
                 <div class="mb-3">
                     <button class="btn btn-primary btn-lg btn-block">Update Vaccine Center</button>
                 </div>
             </form>
-            <a href="/vaccineCenters/<%=  vc._id %>" class="btn btn-secondary btn-lg btn-block mb-5" role="button">Back
-                To
-                Vaccine Center</a>
-
+            <a href="/vaccineCenters/<%=  vc._id %>" class="btn btn-secondary btn-lg btn-block mb-5" role="button">
+                Back To Vaccine Center</a>
         </div>
     </div>

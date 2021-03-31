@@ -1,7 +1,8 @@
 <% layout('layouts/boilerplate')%>
+
     <div class="row mb-5">
         <h1 class="text-center mb-4">New Vaccine Center</h1>
-        <div class="col-6 offset-3">
+        <div class="col-7 mx-auto">
             <form action="/vaccineCenters" method="POST" novalidate class="validated-form">
                 <div class="row">
                     <div class="mb-3 col-6">
@@ -22,14 +23,25 @@
                 </div>
                 <div class="row">
                     <div class="mb-3 col-4">
-                        <label class="form-label" for="price">Vaccine Center Pricing</label>
+                        <label class="form-label" for="vaccine">Vaccine</label>
+                        <select class="form-select" id="service" name="vaccineCenter[vaccine]"
+                            aria-label="multiple select" required>
+                            <option selected>Select Vaccine Offered</option>
+                            <option value="Pfizer">Pfizer</option>
+                            <option value="Moderna">Moderna</option>
+                            <option value="Johnson & Johnson">Johnson & Johnson</option>
+
+                        </select>
+                    </div>
+                    <div class="mb-3 col-3">
+                        <label class="form-label" for="price">Pricing</label>
                         <div class="input-group">
                             <span class="input-group-text" id="price-label">$</span>
                             <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
                                 aria-describedby="price-label" name="vaccineCenter[price]" required>
                         </div>
                     </div>
-                    <div class="mb-3 col-8">
+                    <div class="mb-3 col-5">
                         <label class="form-label" for="service">Service(s)</label>
                         <select class="form-select" id="service" name="vaccineCenter[service]"
                             aria-label="multiple select">

@@ -1,46 +1,32 @@
 <% layout('layouts/boilerplate') %>
+
     <h1 class="mb-4 text-center">All Vaccine Centers</h1>
     <div id="cluster-map" style="width: 97.6%; height: 500px" class="mx-auto"></div>
     <div class="container my-5">
-
         <% for (let vc of vcs){ %>
             <div class="card mb-4">
                 <div class="row">
                     <div class="col-md-5">
-                        <img class="img-fluid w-100 h-100" alt="" src="<%= vc.image %>">
+                        <img style="width:100%; height:100%; max-height:22rem;" alt="" src="<%= vc.image %>">
                     </div>
                     <div class="col-md-7">
                         <div class="card-body">
-                            <h5 class="card-title mb-0">
-                                <%= vc.name %>
-                            </h5>
-                            <p class="card-text">
-                                <small class="text-muted">
-                                    <%= vc.location %>
-                                </small>
-                            </p>
-                            <p class="card-text mb-0">
-                                Services: <%= vc.service %>
-                            </p>
-                            <p class="card-text">
-                                Pricing - $<%= vc.price %>
-                            </p>
-                            <p class="card-text">
-                                <%= vc.description %>
-                            </p>
-
-                            <a class="btn btn-primary" href="/vaccineCenters/<%= vc._id %>">View
-                                <%= vc.name %>
-                            </a>
+                            <h5 class="card-title mb-0"> <%= vc.name %> </h5>
+                            <p class="card-text"> <small class="text-muted"><%= vc.location %></small> </p>
+                            <p class="card-text mb-0"> Vaccine: <%= vc.vaccine %> </p>
+                            <p class="card-text mb-0"> Pricing - $<%= vc.price %> </p>
+                            <p class="card-text"> Services: <%= vc.service %> </p>
+                            <p class="card-text"> <%= vc.description %> </p>
+                            <a class="btn btn-primary" href="/vaccineCenters/<%= vc._id %>">View <%= vc.name %> </a>
                         </div>
                     </div>
                 </div>
             </div>
-
             <% } %>
     </div>
+
     <script>
-        const mapToken='<%-process.env.MAPBOX_TOKEN %>'
-        const vcs={ features: <%- JSON.stringify(vcs)%>}
+        const mapToken = '<%-process.env.MAPBOX_TOKEN %>'
+        const vcs = { features: <%- JSON.stringify(vcs) %>}
     </script>
     <script src="/javascripts/clusterMap.js"></script>
