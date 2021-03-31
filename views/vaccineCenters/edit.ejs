@@ -5,24 +5,30 @@
         <div class="col-7 mx-auto">
             <form action="/vaccineCenters/<%= vc._id %>?_method=PUT" method="POST" novalidate class="validated-form">
                 <div class="row">
-                    <div class="mb-3 col-6">
+                    <div class="mb-2 col-6">
                         <label class="form-label" for="name">Name</label>
                         <input class="form-control" type="text" id="name" name="vaccineCenter[name]"
                             value="<%= vc.name  %>" required>
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-2 col-6">
                         <label class="form-label" for="location">Location</label>
                         <input class="form-control" type="text" id="location" name="vaccineCenter[location]"
                             value="<%= vc.location  %>" required>
                     </div>
+                    
                 </div>
-                <div class="mb-3">
+                <div class="mb-2">
+                    <label class="form-label" for="registerURL">Register URL</label>
+                    <input class="form-control" type="text" id="registerURL" name="vaccineCenter[registerURL]" required
+                    value="<%= vc.registerURL  %>">
+                </div>
+                <div class="mb-2">
                     <label class="form-label" for="image">Image URL</label>
                     <input class="form-control" type="text" id="image" name="vaccineCenter[image]"
                         value="<%= vc.image  %>" required>
                 </div>
                 <div class="row">
-                    <div class="mb-3 col-4">
+                    <div class="mb-2 col-4">
                         <label class="form-label" for="vaccine">Vaccine</label>
                         <select class="form-select" id="service" name="vaccineCenter[vaccine]"
                             aria-label="multiple select" value="<%= vc.vaccine %>" required>
@@ -32,7 +38,7 @@
 
                         </select>
                     </div>
-                    <div class="mb-3 col-3">
+                    <div class="mb-2 col-3">
                         <label class="form-label" for="price">Pricing</label>
                         <div class="input-group">
                             <span class="input-group-text" id="price-label">$</span>
@@ -41,7 +47,7 @@
                                 required>
                         </div>
                     </div>
-                    <div class="mb-3 col-5">
+                    <div class="mb-2 col-5">
                         <label class="form-label" for="service">Service(s)</label>
                         <select class="form-select" id="service" aria-label="multiple select"
                             name="vaccineCenter[service]" value="<%= vc.service  %>" required>
@@ -51,12 +57,12 @@
                         </select>
                     </div>
                 </div>
-                <div class="mb-4">
+                <div class="mb-2">
                     <label class="form-label" for="description">Description</label>
                     <textarea class="form-control" type="text" id="description" name="vaccineCenter[description]"
                         required rows="4"><%=  vc.description %></textarea>
                 </div>
-                <div class="mb-3">
+                <div class="mb-2">
                     <button class="btn btn-primary btn-lg btn-block">Update Vaccine Center</button>
                 </div>
             </form>

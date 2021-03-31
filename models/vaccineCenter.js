@@ -9,6 +9,7 @@ const vaccineCenterSchema = new Schema({
     image: String,
     price: Number,
     location: String,
+    registerURL: String,
     service: {
         type: String,
         enum: ['Walk-In', 'Appointment', 'Both']

@@ -8,7 +8,8 @@ module.exports.vaccineCenterSchema = Joi.object({
         location: Joi.string().required(),
         description: Joi.string().required(),
         service: Joi.string().required(),
-        vaccine: Joi.string().required()
+        vaccine: Joi.string().required(),
+        registerURL: Joi.string().required()
     }).required()
 })
 

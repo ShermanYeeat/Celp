@@ -12,6 +12,7 @@
                     <div class="col-md-7">
                         <div class="card-body">
                             <h5 class="card-title mb-0"> <%= vc.name %> </h5>
+                            <a class="mb-0" href="<%= vc.registerURL %>"> <%= vc.registerURL %> </a>
                             <p class="card-text"> <small class="text-muted"><%= vc.location %></small> </p>
                             <p class="card-text mb-0"> Vaccine: <%= vc.vaccine %> </p>
                             <p class="card-text mb-0"> Pricing - $<%= vc.price %> </p>
