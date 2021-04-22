@@ -18,6 +18,8 @@ Mongodb, Express, and Node.
 * joi
 * method-override
 * mapbox
+* passport
+* cloudinary
 
 ## Usage (3 Terminals Needed)
 1. Run 'npm install' in the root directory to install all dependencies
