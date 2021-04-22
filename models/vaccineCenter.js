@@ -1,29 +1,24 @@
-const mongoose = require('mongoose')
-const Review = require('./review')
-const Schema = mongoose.Schema
-const opts = { toJSON: { virtuals: true } }
+const mongoose=require('mongoose')
+const Review=require('./review')
+const Schema=mongoose.Schema
 
-const vaccineCenterSchema = new Schema({
-    name: String,
-    description: String,
-    image: String,
-    price: Number,
-    location: String,
-    registerURL: String,
-    service: {
-        type: String,
-        enum: ['Walk-In', 'Appointment', 'Both']
-    },
-    vaccine: {
-        type: String,
-        enum: ['Pfizer', 'Moderna', 'Johnson & Johnson']
-    },
-    reviews: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Review'
-        }
-    ],
+
+// https://res.cloudinary.com/douqbebwk/image/upload/w_300/v1600113904/Celp/gxgle1ovzd2f3dgcpass.png
+
+const ImageSchema=new Schema({
+    url: String,
+    filename: String
+})
+
+ImageSchema.virtual('thumbnail').get(function () {
+    return this.url.replace('/upload', '/upload/w_200')
+})
+
+const opts={ toJSON: { virtuals: true } }
+
+const VaccineCenterSchema=new Schema({
+    title: String,
+    images: [ImageSchema],
     geometry: {
         type: {
             type: String,
@@ -34,25 +29,43 @@ const vaccineCenterSchema = new Schema({
             type: [Number],
             required: true
         }
-    }
+    },
+    price: Number,
+    service: {
+        type: String,
+        enum: ['Walk-In', 'Appointment', 'Both']
+    },
+    description: String,
+    location: String,
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    reviews: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Review'
+        }
+    ]
 }, opts)
 
-// Gives Vaccine Centers an additional variable popUpMarkup 
-// What pops up when clicking on a vaccine center in the cluster map
-vaccineCenterSchema.virtual('properties.popUpMarkup').get(function () {
-    return `<strong><a href="/vaccineCenters/${this._id}">${this.name}</a><strong>
+
+VaccineCenterSchema.virtual('properties.popUpMarkup').get(function () {
+    return `
+    <strong><a href="/VaccineCenters/${this._id}">${this.title}</a><strong>
     <p>${this.description.substring(0, 20)}...</p>`
 })
 
-// When a vaccine center is deleted, remove all reviews associated with them
-vaccineCenterSchema.post('findOneAndDelete', async function (document) {
-    if (document) {
+
+
+VaccineCenterSchema.post('findOneAndDelete', async function (doc) {
+    if (doc) {
         await Review.deleteMany({
             _id: {
-                $in: document.reviews
+                $in: doc.reviews
             }
         })
     }
 })
 
-module.exports = mongoose.model('VaccineCenter', vaccineCenterSchema)
+module.exports=mongoose.model('VaccineCenter', VaccineCenterSchema)

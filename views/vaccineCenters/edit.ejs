@@ -1,72 +1,83 @@
-<% layout('layouts/boilerplate') %>
-
+<% layout('layouts/boilerplate')%>
     <div class="row">
         <h1 class="text-center mb-4">Edit Vaccine Center</h1>
-        <div class="col-7 mx-auto">
-            <form action="/vaccineCenters/<%= vc._id %>?_method=PUT" method="POST" novalidate class="validated-form">
+        <div class="col-md-7 mx-auto">
+            <form action="/VaccineCenters/<%=vaccineCenter._id%>?_method=PUT" method="POST" novalidate
+                class="validated-form" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="mb-2 col-6">
-                        <label class="form-label" for="name">Name</label>
-                        <input class="form-control" type="text" id="name" name="vaccineCenter[name]"
-                            value="<%= vc.name  %>" required>
+                    <div class="mb-3 col-6">
+                        <label class="form-label" for="title">Title</label>
+                        <input class="form-control" type="text" id="title" name="VaccineCenter[title]"
+                            value="<%=vaccineCenter.title %>" required>
                     </div>
-                    <div class="mb-2 col-6">
+                    <div class="mb-3 col-6">
                         <label class="form-label" for="location">Location</label>
-                        <input class="form-control" type="text" id="location" name="vaccineCenter[location]"
-                            value="<%= vc.location  %>" required>
+                        <input class="form-control" type="text" id="location" name="VaccineCenter[location]"
+                            value="<%=vaccineCenter.location %>" required>
                     </div>
-                    
-                </div>
-                <div class="mb-2">
-                    <label class="form-label" for="registerURL">Register URL</label>
-                    <input class="form-control" type="text" id="registerURL" name="vaccineCenter[registerURL]" required
-                    value="<%= vc.registerURL  %>">
-                </div>
-                <div class="mb-2">
-                    <label class="form-label" for="image">Image URL</label>
-                    <input class="form-control" type="text" id="image" name="vaccineCenter[image]"
-                        value="<%= vc.image  %>" required>
                 </div>
                 <div class="row">
-                    <div class="mb-2 col-4">
-                        <label class="form-label" for="vaccine">Vaccine</label>
-                        <select class="form-select" id="service" name="vaccineCenter[vaccine]"
-                            aria-label="multiple select" value="<%= vc.vaccine %>" required>
-                            <option value="Pfizer">Pfizer</option>
-                            <option value="Moderna">Moderna</option>
-                            <option value="Johnson & Johnson">Johnson & Johnson</option>
-
-                        </select>
-                    </div>
-                    <div class="mb-2 col-3">
-                        <label class="form-label" for="price">Pricing</label>
+                    <div class="mb-3 col-5">
+                        <label class="form-label" for="price">Vaccine Center Pricing</label>
                         <div class="input-group">
                             <span class="input-group-text" id="price-label">$</span>
                             <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
-                                aria-describedby="price-label" name="vaccineCenter[price]" value="<%= vc.price  %>"
-                                required>
+                                aria-describedby="price-label" name="VaccineCenter[price]"
+                                value="<%=vaccineCenter.price %>" required>
                         </div>
                     </div>
-                    <div class="mb-2 col-5">
+                    <div class="mb-3 col-7">
                         <label class="form-label" for="service">Service(s)</label>
-                        <select class="form-select" id="service" aria-label="multiple select"
-                            name="vaccineCenter[service]" value="<%= vc.service  %>" required>
+                        <select class="form-select" id="service" name="VaccineCenter[service]"
+                            aria-label="multiple select" value="<%=vaccineCenter.service %>">
                             <option value="Walk-In">Walk-In</option>
                             <option value="Appointment">Appointment</option>
                             <option value="Both">Both</option>
+
                         </select>
                     </div>
                 </div>
-                <div class="mb-2">
+                <div class="mb-3">
                     <label class="form-label" for="description">Description</label>
-                    <textarea class="form-control" type="text" id="description" name="vaccineCenter[description]"
-                        required rows="4"><%=  vc.description %></textarea>
+                    <textarea class="form-control" type="text" id="description" name="VaccineCenter[description]"
+                        rows="4" required><%=vaccineCenter.description %></textarea>
                 </div>
-                <div class="mb-2">
-                    <button class="btn btn-primary btn-lg btn-block">Update Vaccine Center</button>
+                <div class="mb-3">
+                    <div class="form-file custom-file">
+                        <input type="file" class="form-file-input" id="image" name="image" multiple>
+                        <label class="form-file-label" for="image">
+                            <span class="form-file-text custom-file-label">Add more image(s)...</span>
+                            <span class="form-file-button">Browse</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-4 row">
+
+                    <% vaccineCenter.images.forEach(function(img, i) { %>
+                        <div class="card col-4 pt-3">
+                            <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="">
+                            <div class="text-center my-1">
+
+
+                                <div class="form-check-inline">
+                                    <input type="checkbox" id="image-<%=i%>" name="deleteImages[]"
+                                        value="<%=img.filename%>">
+                                </div>
+                                <label for="image-<%=i%>">Delete?</label>
+
+                            </div>
+                        </div>
+                        <% })%>
+
+
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-primary btn-block">Update Vaccine Center</button>
                 </div>
             </form>
-            <a href="/vaccineCenters/<%=  vc._id %>" class="btn btn-secondary btn-lg btn-block mb-5" role="button">
-                Back To Vaccine Center</a>
+            <a href="/vaccineCenters" class="btn btn-secondary btn-block mb-5" role="button">Back
+                To All
+                Vaccine Center</a>
+
         </div>
     </div>

@@ -1,15 +1,46 @@
-<% layout('layouts/boilerplate')%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celp</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link rel="stylesheet" href="/stylesheets/home.css">
-    <div class="d-flex text-center text-white justify-content-center" id="center">
-        <div class="cover-container w-100 h-100">
-            <main class="px-3">
-                <h1 class="mb-4">Welcome to Celp!</h1>
-                <p class="lead">There have been a lot of covid vaccine centers popping up, so I have
-                    created a Yelp style review website for covid vaccine centers to inform users about local vaccine
-                    centers
-                    around them. Created with Mongodb, Express, and Node.</p>
-                <a href="/vaccineCenters" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">View
-                    Vaccine Centers</a>
-            </main>
-        </div>
+</head>
+
+<body class="d-flex text-center text-white bg-dark ">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto justify-content-center align-items-center ">
+        <main class="px-3">
+            <h1 class="mb-4">Welcome to Celp!</h1>
+            <p class="lead">There have been a lot of covid vaccine centers popping up, so I
+                have
+                created a
+                Yelp style review website for covid vaccine centers to inform users about local vaccine centers
+                around
+                them. Created
+                with Mongodb, Express, and Node.</p>
+            <a href="/VaccineCenters" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white mb-3">View
+                Vaccine Centers</a>
+            <p>
+                <small class="lead">
+                    * All of these locations are seeded randomly and are not real places!
+                </small>
+            </p>
+        </main>
+
+
+
     </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

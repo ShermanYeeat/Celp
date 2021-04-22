@@ -1,4 +1,4 @@
-module.exports.names = [
+module.exports.places = [
     'Kootenai Health',
     'Kosciusko Community Hospital',
     'Kuakini Medical Center',
@@ -1396,27 +1396,4 @@ module.exports.names = [
     'York Hospital',
     'Yuma Regional Medical Center',
     'Zuckerberg San Francisco General Hospital and Trauma Center',
-]
-
-
-
-module.exports.images = [
-    'http://d279m997dpfwgl.cloudfront.net/wp/2020/04/wide-view-from-above-1000x750.jpg',
-    'https://s18671.pcdn.co/wp-content/uploads/2020/05/IMG_1616.jpg',
-    'https://www.umms.org/-/media/images/umms/coronavirus/fighting-covid/expanded-locations/overhead-bccfh.jpg?h=310&w=550&la=en&hash=CBB92EB11D714816C2A26FF134759BB9F09CBA4C',
-    'https://whyy.org/wp-content/uploads/2021/01/2021-01-08-k-paynter-convention-center-vaccine-opening-5.jpg',
-    'https://whyy.org/wp-content/uploads/2021/02/AP_coronavirus_vaccine_philly_convention_center_020721_02.jpg',
-    'https://cdn.abcotvs.com/dip/images/10398760_030821-wls-eric-united-center-10p-vid.jpg?w=800&r=16%3A9',
-    'https://cdn.abcotvs.com/dip/images/10370782_022521-kgo-sf-moscone-vax-site-img_Image_00-00-25,04.jpg?w=1600',
-    'https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/baltimore-convention-center-indoor-covid-testing-site-1604678590.png?crop=1.00xw:0.844xh;0,0.0938xh&resize=640:*',
-    'https://s.france24.com/media/display/2d6342e2-5acb-11eb-abfc-005056a98db9/w:1280/p:16x9/China%20hebei%20quarantine%20center.webp',
-    'https://cdn.abcotvs.com/dip/images/10362968_022221-kgo-moscone-center-inside-img_Image_00-00-14,23.jpg?w=800&r=16%3A9',
-    'https://www.orlandosentinel.com/resizer/hrSNF4sOUzfhR2uYzkMcyPN8aNY=/415x240/top/cloudfront-us-east-1.images.arcpublishing.com/tronc/N5V2YIJNHFDMBMDY6A3XCRNK54.jpg',
-    'https://ghwcc.org/wp-content/uploads/2019/01/HOSH-Cover-scaled.jpg',
-    'https://images.squarespace-cdn.com/content/v1/567acee20ab377f38f7f0c72/1553196508664-Y8MA0TB38H5ZKHI12H7W/ke17ZwdGBToddI8pDm48kG87Sfbgg29A4BYEDq3OXvgUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcf4OxbJOyh_wHUnyc4kQLQ6SBshRGOku7c30Y_IRDNPta8R2IY5BHMaEj1zOWoDTZ/01-Lone-Peak-Medical-Office-Building-And-Lone-Peak-Surgery-Center-Draper-UT-min.jpg?format=750w',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4QOYTTKmpNR9NNZXMDls5SwqB-Ovy8fgvzQ&usqp=CAU',
-    'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8aG9zcGl0YWx8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-    'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8aG9zcGl0YWwlMjBidWlsZGluZ3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60m',
-    'https://images.unsplash.com/photo-1587351021250-2aeafcc4c6c2?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTF8fGhvc3BpdGFsJTIwYnVpbGRpbmd8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-
 ]
