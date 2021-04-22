@@ -1,84 +1,137 @@
-<% layout('layouts/boilerplate') %>
+<% layout('layouts/boilerplate')%>
+    <link rel="stylesheet" href="/stylesheets/stars.css">
+    <div class="row mb-4">
+        <div class="col-6">
+            <div id="vaccineCenterCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <% vaccineCenter.images.forEach((img, i)=> { %>
+                        <div class="carousel-item <%= i === 0 ? 'active' : ''%>">
+                            <img src="<%= img.url%>" class="d-block img-fluid w-100 h-100" alt="">
+                        </div>
+                        <% }) %>
 
-    <div class="row my-4">
-        <div class="col-6 mx-auto">
-            <div class="card mb-3 p-3">
-                <img src="<%= vc.image %>" class="card-img-top"  style="width:100%; height:100%; max-height:22rem;" alt="...">
+                </div>
+                <% if(vaccineCenter.images.length> 1) {%>
+                    <a class="carousel-control-prev" href="#vaccineCenterCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#vaccineCenterCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    <% } %>
+            </div>
+
+            <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="card-title mb-0"> <%= vc.name %> </h5>
-                    <a class="" href="<%= vc.registerURL %>"> <%= vc.registerURL %> </a>
-                    <p class="card-text mt-3"> <%= vc.description %> </p>
+                    <h5 class="card-title">
+                        <%= vaccineCenter.title%>
+                    </h5>
+                    <p class="card-text">
+                        <%= vaccineCenter.description%>
+                    </p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item text-muted"> <%= vc.location %> </li>
-                    <li class="list-group-item">Vaccine - <%= vc.vaccine %> </li>
-                    <li class="list-group-item">Pricing - $<%= vc.price %> </li>
-                    <li class="list-group-item">Services: <%= vc.service %> </li>
+                    <li class="list-group-item text-muted">
+                        <%= vaccineCenter.location%>
+                    </li>
+                    <li class="list-group-item">Submitted by <%= vaccineCenter.author.username%>
+                    </li>
+                    <li class="list-group-item">Pricing - $<%= vaccineCenter.price%>
+                    </li>
                 </ul>
-                <div class="card-body">
-                    <a class="card-link btn btn-primary" href="/vaccineCenters/<%= vc._id %>/edit">Edit</a>
-                    <form class="d-inline" action="/vaccineCenters/<%= vc._id %>?_method=DELETE" method="POST">
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-                <div class="card-footer text-muted"> 2 days ago </div>
-            </div>
-        </div>
-
-        <div class="col-5 mx-auto">
-            <div id='map' style='width: 100%; height: 300px;'></div>
-            <div class="border pt-2 px-4 my-5">
-                <h2 class="mb-4">Leave a Review</h2>
-                <form action="/vaccineCenters/<%= vc._id %>/reviews" method="POST" class="mb-3 validated-form" novalidate>
-                    <div class="row">
-                        <div class="mb-2 col-5">
-                            <label class="form-label" for="rating">Rating</label>
-                            <select class="form-select" id="rating" name="review[rating] aria-label=" select">
-                                <option selected>Select Rating</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
+                <% if( currentUser && vaccineCenter.author.equals(currentUser._id)) {%>
+                    <div class="card-body">
+                        <a class="card-link btn btn-primary" href="/VaccineCenters/<%=vaccineCenter._id%>/edit">Edit</a>
+                        <form class="d-inline" action="/VaccineCenters/<%=vaccineCenter._id%>?_method=DELETE"
+                            method="POST">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                    <% } %>
+                        <div class="card-footer text-muted">
+                            2 days ago
                         </div>
-                        <div class="mb-3 col-7">
-                            <label class="form-label" for="service">Service</label>
-                            <select class="form-select" id="service" name="review[service] aria-label=" select">
+            </div>
+
+        </div>
+        <div class="col-6 mb-3">
+            <div id='map' class="mb-5"></div>
+            <div class="border pt-3">
+                <div class="col-11 mx-auto">
+
+                    <h2 class="text-center">Leave a Review</h2>
+                    <form action="/VaccineCenters/<%=vaccineCenter._id%>/reviews" method="POST"
+                        class="mb-3 validated-form" novalidate>
+                        <!-- <div class="mb-3">
+                <label class="form-label" for="rating">Rating</label>
+                <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
+            </div> -->
+
+
+                        <div class="mb-3">
+                            <label class="form-label" for="service">Service(s)</label>
+                            <select class="form-select mb-2" id="service" name="review[service]"
+                                aria-label="multiple select">
                                 <option selected>Select Service(s) Offered</option>
                                 <option value="Walk-In">Walk-In</option>
                                 <option value="Appointment">Appointment</option>
                                 <option value="Both">Both</option>
+
                             </select>
+                            <label class="form-label" for="body">Review Text</label>
+                            <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3"
+                                required></textarea>
                         </div>
-                    </div>
-                    <div class="mb-4">
-                        <label class="form-label" for="description">Review</label>
-                        <textarea class="form-control" name="review[description]" id="description" cols="30" rows="4"
-                            required placeholder="Please give a review!"></textarea>
-                    </div>
-                    <button class="btn btn-primary">Submit</button>
-                </form>
+                        <fieldset class="starability-basic">
+                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1"
+                                checked aria-label="No rating." />
+                            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                            <label for="first-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                            <label for="first-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                            <label for="first-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                            <label for="first-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                            <label for="first-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
+                        <button class="btn btn-primary btn-block mb-4">Submit</button>
+                    </form>
+                </div>
             </div>
-            <% for(let review of vc.reviews) { %>
-                <div class="card mb-3 ">
+            <% for(let review of vaccineCenter.reviews) { %>
+                <div class="card mb-3 my-4">
                     <div class="card-body">
-                        <h5 class="card-title mb-0">Rating: <%= review.rating %> </h5>
-                        <p class="card-text mb-1">Service: <%= review.service %> </p>
-                        <p class="card-text mb-2"> <%= review.description %> </p>
-                        <form action="/vaccineCenters/<%= vc._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </form>
+                        <h5 class="card-title">
+                            <%= review.author.username%>
+                        </h5>
+                        <p class="starability-result" data-rating="<%=review.rating%>">
+                            Rated: <%= review.rating %> stars
+                        </p>
+                        <!-- <h6 class="card-subtitle mb-2 text-muted">By <%= review.author.username%></h6> -->
+                        <p class="card-text">Service: <%= review.service %>
+                        </p>
+                        <p class="card-text">
+                            <%= review.body %>
+                        </p>
+                        <% if( currentUser && review.author.equals(currentUser._id)) {%>
+                            <form action="/VaccineCenters/<%=vaccineCenter._id%>/reviews/<%=review._id%>?_method=DELETE"
+                                method="POST">
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                            <% } %>
                     </div>
                 </div>
                 <% } %>
         </div>
     </div>
 
-
     <script>
-        const mapToken = '<%- process.env.MAPBOX_TOKEN %>'
-        const vc = <%- JSON.stringify(vc) %>
+        const mapToken='<%-process.env.MAPBOX_TOKEN%>'
+        const vaccineCenter= <%- JSON.stringify(vaccineCenter)%>
     </script>
 
-    <script src="/javascripts/showMap.js"></script>
+    <script src="/javascripts/showPageMap.js"></script>

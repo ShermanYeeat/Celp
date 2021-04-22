@@ -1,8 +1,8 @@
-mapboxgl.accessToken = mapToken
-const map = new mapboxgl.Map({
+mapboxgl.accessToken=mapToken
+const map=new mapboxgl.Map({
     container: 'cluster-map',
     style: 'mapbox://styles/mapbox/light-v10',
-    center: [-98, 38],
+    center: [-98, 38.5],
     zoom: 3.25
 })
 
@@ -11,11 +11,11 @@ map.on('load', function () {
     // Add a new source from our GeoJSON data and
     // set the 'cluster' option to true. GL-JS will
     // add the point_count property to your source data.
-    map.addSource('vcs', {
+    map.addSource('vaccineCenters', {
         type: 'geojson',
         // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
         // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        data: vcs,
+        data: vaccineCenters,
         cluster: true,
         clusterMaxZoom: 14, // Max zoom to cluster points on
         clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
@@ -24,7 +24,7 @@ map.on('load', function () {
     map.addLayer({
         id: 'clusters',
         type: 'circle',
-        source: 'vcs',
+        source: 'vaccineCenters',
         filter: ['has', 'point_count'],
         paint: {
             // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
@@ -56,7 +56,7 @@ map.on('load', function () {
     map.addLayer({
         id: 'cluster-count',
         type: 'symbol',
-        source: 'vcs',
+        source: 'vaccineCenters',
         filter: ['has', 'point_count'],
         layout: {
             'text-field': '{point_count_abbreviated}',
@@ -68,7 +68,7 @@ map.on('load', function () {
     map.addLayer({
         id: 'unclustered-point',
         type: 'circle',
-        source: 'vcs',
+        source: 'vaccineCenters',
         filter: ['!', ['has', 'point_count']],
         paint: {
             'circle-color': '#11b4da',
@@ -80,11 +80,11 @@ map.on('load', function () {
 
     // inspect a cluster on click
     map.on('click', 'clusters', function (e) {
-        const features = map.queryRenderedFeatures(e.point, {
+        const features=map.queryRenderedFeatures(e.point, {
             layers: ['clusters']
         })
-        const clusterId = features[0].properties.cluster_id
-        map.getSource('vcs').getClusterExpansionZoom(
+        const clusterId=features[0].properties.cluster_id
+        map.getSource('vaccineCenters').getClusterExpansionZoom(
             clusterId,
             function (err, zoom) {
                 if (err) return
@@ -102,14 +102,14 @@ map.on('load', function () {
     // the location of the feature, with
     // description HTML from its properties.
     map.on('click', 'unclustered-point', function (e) {
-        const { popUpMarkup } = e.features[0].properties
-        const coordinates = e.features[0].geometry.coordinates.slice()
+        const { popUpMarkup }=e.features[0].properties
+        const coordinates=e.features[0].geometry.coordinates.slice()
 
         // Ensure that if the map is zoomed out such that
         // multiple copies of the feature are visible, the
         // popup appears over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+        while (Math.abs(e.lngLat.lng-coordinates[0])>180) {
+            coordinates[0]+=e.lngLat.lng>coordinates[0]? 360:-360
         }
 
         new mapboxgl.Popup()
@@ -119,9 +119,9 @@ map.on('load', function () {
     })
 
     map.on('mouseenter', 'clusters', function () {
-        map.getCanvas().style.cursor = 'pointer'
+        map.getCanvas().style.cursor='pointer'
     })
     map.on('mouseleave', 'clusters', function () {
-        map.getCanvas().style.cursor = ''
+        map.getCanvas().style.cursor=''
     })
 })
